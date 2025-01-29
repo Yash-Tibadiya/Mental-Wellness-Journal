@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# Mental Wellness Journal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and calming **Mental Wellness Journal** app that allows users to journal their thoughts, track moods, and reflect on past trends. The app focuses on creating a peaceful user experience with a visually appealing and responsive design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📝 Journaling Functionality
+- A **text editor** for users to write daily journal entries.
+- **Categorization tags** (e.g., "Grateful", "Stressful") for each entry.
 
-## Expanding the ESLint configuration
+### 😊 Mood Tracker
+- Users can select **mood icons** (e.g., happy, sad, stressed) for each day.
+- **Trend charts** visualize mood patterns over time.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### ✨ Inspirational Quotes
+- Fetch **daily inspirational quotes** from an API (e.g., [ZenQuotes API](https://zenquotes.io/)).
+- Display quotes in an aesthetically pleasing manner with animations.
 
-- Configure the top-level `parserOptions` property like this:
+### 🎨 Calming UI
+- Uses **soft colors, gradients, and smooth transitions**.
+- **Dark mode** support for nighttime journaling.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📌 Additional Enhancements
+- **Calendar integration** to display journal entries and mood ratings for specific dates.
+- **localStorage support** to save entries without a backend.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🚀 Installation & Setup
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Yash-Tibadiya/Mental-Wellness-Journal.git
+   cd Mental-Wellness-Journal
+   ```
+2. **Install dependencies** (if using a frontend framework like React or Vue)
+   ```bash
+   pnpm install
+   ```
+3. **Run the app**
+   ```bash
+   pnpm run dev
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🛠️ Technologies Used
+- **React.js** (if applicable) for a dynamic user interface.
+- **ZenQuotes API** for fetching daily inspirational quotes.
+- **localStorage** is used to save user data.
+
+## 📷 Screenshots
+![Mental Wellness Journal Preview](https://img.enacton.com/ShareX/2025/01/j9zf5CXxVQ.png)
+![Mental Wellness Journal Preview](https://img.enacton.com/ShareX/2025/01/chrome_h4OSR4PJzK.png)
+
+
+## 🌟 Contributing
+Feel free to contribute by submitting a pull request or opening an issue!
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+**Happy Journaling! 💙**
