@@ -9,6 +9,6 @@ export interface JournalEntry {
 }
 
 export interface Quote {
-  content: string;
-  author: string;
+  q: string;
+  a: string;
 }
