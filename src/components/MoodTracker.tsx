@@ -37,7 +37,7 @@ const moods: { type: Mood; icon: React.ReactNode; label: string }[] = [
 
 export function MoodTracker({ selectedMood, onMoodSelect }: MoodTrackerProps) {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+    <div className="p-6 bg-white rounded-lg shadow-lg dark:bg-[#101012]">
       <h3 className="mb-4 text-lg font-semibold dark:text-white">
         How are you feeling today?
       </h3>
@@ -46,12 +46,11 @@ export function MoodTracker({ selectedMood, onMoodSelect }: MoodTrackerProps) {
           <button
             key={type}
             onClick={() => onMoodSelect(type)}
-            className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200
-              ${
-                selectedMood === type
-                  ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 w-24 h-24 flex justify-center"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 w-24 h-24 flex justify-center"
-              }`}
+            className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 w-24 h-24 justify-center border ${
+              selectedMood === type
+                ? "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100"
+                : "bg-white dark:bg-[#0e0e10] text-gray-600 dark:text-white border-gray-300 dark:border-[#1f1f23] hover:bg-gray-100 dark:hover:bg-accent"
+            }`}
           >
             {icon}
             <span className="mt-2 text-sm">{label}</span>

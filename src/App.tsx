@@ -1,16 +1,20 @@
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Journal } from "./pages/Journal";
+import { ThemeProvider } from "@/components/theme-provider"; 
+import { Home } from "./components/pages/Home";
+import { Journal } from "./components/pages/Journal";
+import { ChartPage } from "./components/pages/ChartPage";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/journal" element={<Journal />} />
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/journal" element={<Journal />} />
+          <Route path="/chart" element={<ChartPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

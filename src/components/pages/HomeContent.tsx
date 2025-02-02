@@ -1,26 +1,26 @@
 import { Link } from "react-router-dom";
-import { Book, Quote as QuoteIcon } from "lucide-react";
-import { QuoteDisplay } from "../components/QuoteDisplay";
+import { Book, QuoteIcon } from "lucide-react";
+import { ModeToggle } from "../../components/mode-toggle";
+import { QuoteDisplay } from "../QuoteDisplay";
 
-export function Home() {
-
+const HomeContent = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen w-full">
       <div className="container mx-auto px-4 py-8">
         <nav className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
             Mental Wellness
           </h1>
-          <Link
-            to="/journal"
-            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 rounded-lg 
-                     shadow-lg hover:shadow-xl transition-all duration-300 text-gray-800 
-                     dark:text-white hover:scale-105"
-          >
-            <Book className="w-5 h-5" />
-            <span>Open Journal</span>
-          </Link>
-          
+          <div className="flex items-center gap-4">
+            <ModeToggle />
+            <Link
+              to="/journal"
+              className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-60 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+            >
+              <Book className="h-[1.5rem] w-[1.5rem]" />
+              <span className="text-xl">Open Journal</span>
+            </Link>
+          </div>
         </nav>
 
         <div className="max-w-4xl mx-auto">
@@ -49,8 +49,8 @@ export function Home() {
             <Link
               to="/journal"
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r 
-                       from-purple-600 to-blue-600 text-white rounded-lg shadow-lg 
-                       hover:shadow-xl transition-all duration-300 hover:scale-105"
+                         from-purple-600 to-blue-600 text-white rounded-lg shadow-lg 
+                         hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               <QuoteIcon className="w-6 h-6" />
               <span className="text-lg font-medium">Start Journaling</span>
@@ -60,4 +60,6 @@ export function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default HomeContent;

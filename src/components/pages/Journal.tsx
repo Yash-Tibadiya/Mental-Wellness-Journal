@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Moon, Sun, Smile, Meh, Frown, Coffee, Brain, Home } from 'lucide-react';
-import { JournalEditor } from '../components/JournalEditor';
-import { MoodTracker } from '../components/MoodTracker';
-import { QuoteDisplay } from '../components/QuoteDisplay';
-import type { JournalEntry, Mood } from '../types';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Smile,
+  Meh,
+  Frown,
+  Coffee,
+  Brain,
+  Home,
+  ChartColumnStacked,
+  Book,
+} from "lucide-react";
+import { JournalEditor } from "../JournalEditor";
+import { MoodTracker } from "../MoodTracker";
+import { QuoteDisplay } from "../QuoteDisplay";
+import { ModeToggle } from "../../components/mode-toggle";
+import type { JournalEntry, Mood } from "../../types";
+import { demoJournalEntries } from "../../DemoData"; 
 
 const moodIcons: Record<Mood, React.ReactNode> = {
   happy: <Smile className="w-5 h-5 text-yellow-500" />,
@@ -15,39 +26,39 @@ const moodIcons: Record<Mood, React.ReactNode> = {
 };
 
 const moodLabels: Record<Mood, string> = {
-  happy: 'Happy',
-  calm: 'Calm',
-  neutral: 'Neutral',
-  sad: 'Sad',
-  stressed: 'Stressed',
+  happy: "Happy",
+  calm: "Calm",
+  neutral: "Neutral",
+  sad: "Sad",
+  stressed: "Stressed",
 };
 
 export function Journal() {
-  const [darkMode, setDarkMode] = useState(false);
+  // Load entries from localStorage
+  // const [entries, setEntries] = useState<JournalEntry[]>(() => {
+  //   const saved = localStorage.getItem("journal-entries");
+  //   return saved ? JSON.parse(saved) : [];
+  // });
   const [entries, setEntries] = useState<JournalEntry[]>(() => {
-    const saved = localStorage.getItem('journal-entries');
-    return saved ? JSON.parse(saved) : [];
+    const saved = localStorage.getItem("journal-entries");
+    if (saved) return JSON.parse(saved);
+    else return demoJournalEntries;
   });
   const [currentMood, setCurrentMood] = useState<Mood | null>(null);
 
+  // Persist entries to localStorage on change
   useEffect(() => {
-    localStorage.setItem('journal-entries', JSON.stringify(entries));
+    localStorage.setItem("journal-entries", JSON.stringify(entries));
   }, [entries]);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  const handleSaveEntry = (content: string, tags: string[]) => {
+  // Updated to accept a date parameter
+  const handleSaveEntry = (content: string, tags: string[], date?: Date) => {
+    // Only save if content is non-empty and a mood is selected
     if (!content.trim() || !currentMood) return;
 
     const newEntry: JournalEntry = {
       id: Date.now().toString(),
-      date: new Date().toISOString(),
+      date: date ? date.toISOString() : new Date().toISOString(),
       content,
       mood: currentMood,
       tags,
@@ -58,30 +69,31 @@ export function Journal() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#09090b] transition-colors duration-200">
       <div className="container mx-auto px-4 py-8">
         <header className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
-            <Link
-              to="/"
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 
-                       hover:bg-gray-300 dark:hover:bg-gray-600 
-                       transition-colors duration-200"
-            >
-              <Home className="w-5 h-5 text-gray-700 dark:text-gray-200" />
-            </Link>
+            <Book className="h-[1.7rem] w-[1.7rem]" />
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
               Journal
             </h1>
           </div>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 
-                     hover:bg-gray-300 dark:hover:bg-gray-600 
-                     transition-colors duration-200"
-          >
-            {darkMode ? <Sun className="text-white" /> : <Moon className="text-gray-700" />}
-          </button>
+          {/* ModeToggle + Chat Icon */}
+          <div className="flex items-center gap-4">
+            <Link
+              to="/"
+              className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+            >
+              <Home className="h-[1.5rem] w-[1.5rem] text-gray-700 dark:text-white" />
+            </Link>
+            <ModeToggle />
+            <Link
+              to="/chart"
+              className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+            >
+              <ChartColumnStacked className="h-[1.5rem] w-[1.5rem]" />
+            </Link>
+          </div>
         </header>
 
         <div className="grid gap-8 md:grid-cols-2">
@@ -92,8 +104,9 @@ export function Journal() {
               onMoodSelect={setCurrentMood}
             />
           </div>
-          
+
           <div>
+            {/* JournalEditor passes content, tags, and the selected date */}
             <JournalEditor onSave={handleSaveEntry} />
           </div>
         </div>
@@ -106,9 +119,7 @@ export function Journal() {
             {entries.map((entry, index) => (
               <div
                 key={entry.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg
-                         transform hover:scale-[1.02] transition-all duration-300
-                         animate-fade-in"
+                className="bg-white dark:bg-[#18181b] rounded-lg p-6 shadow-lg transform hover:scale-[1.02] transition-all duration-300 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="flex justify-between items-start mb-4">
@@ -123,8 +134,7 @@ export function Journal() {
                       {entry.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 
-                                   text-blue-800 dark:text-blue-100 text-sm"
+                          className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-sm"
                         >
                           {tag}
                         </span>
@@ -134,9 +144,6 @@ export function Journal() {
                   <div className="text-right">
                     <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
                       {new Date(entry.date).toLocaleDateString()}
-                    </div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500">
-                      {new Date(entry.date).toLocaleTimeString()}
                     </div>
                   </div>
                 </div>
