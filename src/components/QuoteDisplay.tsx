@@ -6,7 +6,8 @@ export function QuoteDisplay() {
   const [quote, setQuote] = useState<QuoteType | null>(null);
 
   useEffect(() => {
-    fetch("https://api.quotable.io/random")
+    fetch("https://zenquotes.io/api/random")
+    // fetch("https://api.quotable.io/random")
       .then((res) => res.json())
       .then((data) => setQuote({ content: data.content, author: data.author }));
   }, []);
