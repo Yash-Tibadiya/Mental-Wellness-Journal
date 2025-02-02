@@ -1,4 +1,4 @@
-export type Mood = 'happy' | 'calm' | 'neutral' | 'sad' | 'stressed';
+export type Mood = "happy" | "calm" | "neutral" | "sad" | "stressed";
 
 export interface JournalEntry {
   id: string;
@@ -9,6 +9,6 @@ export interface JournalEntry {
 }
 
 export interface Quote {
-  q: string;
-  a: string;
+  quote: string;
+  author: string;
 }

@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Quote } from 'lucide-react';
-import type { Quote as QuoteType } from '../types';
+import { useEffect, useState } from "react";
+import { Quote } from "lucide-react";
+import type { Quote as QuoteType } from "../types";
 
 export function QuoteDisplay() {
   const [quote, setQuote] = useState<QuoteType | null>(null);
 
   useEffect(() => {
-    fetch("https://zenquotes.io/api/random")
-    // fetch("https://api.quotable.io/random")
+    fetch("https://dummyjson.com/quotes/random")
       .then((res) => res.json())
-      .then((data) => setQuote({ content: data.q, author: data.a }));
+      .then((data) => setQuote({ quote: data.quote, author: data.author }));
   }, []);
 
   if (!quote) return null;
@@ -19,8 +18,8 @@ export function QuoteDisplay() {
       <div className="flex items-start gap-4">
         <Quote className="w-8 h-8 flex-shrink-0 mt-1" />
         <div>
-          <p className="text-lg font-medium italic mb-2">{quote.q}</p>
-          <p className="text-sm opacity-90">— {quote.a}</p>
+          <p className="text-lg font-medium italic mb-2">{quote.quote}</p>
+          <p className="text-sm opacity-90">— {quote.author}</p>
         </div>
       </div>
     </div>
