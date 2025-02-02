@@ -14,7 +14,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Brain, Coffee, Frown, Meh, Smile } from "lucide-react";
+import { Book, Brain, Coffee, Frown, Home, Meh, Smile } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ModeToggle } from "../mode-toggle";
 
 // Define the ChartConfig using our mood keys and colors.
 const chartConfig = {
@@ -112,61 +114,78 @@ export function ChartPage() {
   const chartData = aggregateJournalEntries();
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-2/3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Journal Entries by Mood (Stacked Bar Chart)</CardTitle>
-            <CardDescription>Aggregated by Month</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig}>
-              <BarChart data={chartData}>
-                <CartesianGrid vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  tickLine={false}
-                  tickMargin={10}
-                  axisLine={false}
-                  tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-                <ChartLegend content={<ChartLegendContent />} />
-                {/* One Bar for each mood; all bars use the same stackId to be stacked */}
-                <Bar
-                  dataKey="happy"
-                  stackId="a"
-                  fill="hsl(var(--chart-1))"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="calm"
-                  stackId="a"
-                  fill="hsl(var(--chart-2))"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="neutral"
-                  stackId="a"
-                  fill="hsl(var(--chart-3))"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="sad"
-                  stackId="a"
-                  fill="hsl(var(--chart-4))"
-                  radius={[4, 4, 0, 0]}
-                />
-                <Bar
-                  dataKey="stressed"
-                  stackId="a"
-                  fill="hsl(var(--chart-5))"
-                  radius={[4, 4, 0, 0]}
-                />
-              </BarChart>
-            </ChartContainer>
-          </CardContent>
-        </Card>
+    <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center gap-4 m-5">
+          <Link
+            to="/"
+            className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          >
+            <Home className="h-[1.5rem] w-[1.5rem] text-gray-700 dark:text-white" />
+          </Link>
+          <ModeToggle />
+          <Link
+            to="/journal"
+            className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          >
+            <Book className="h-[1.5rem] w-[1.5rem]" />
+          </Link>
+        </div>
+      <div className="w-full h-auto flex justify-center items-center">
+        <div className="w-2/3">
+          <Card>
+            <CardHeader>
+              <CardTitle>Journal Entries by Mood (Stacked Bar Chart)</CardTitle>
+              <CardDescription>Aggregated by Month</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig}>
+                <BarChart data={chartData}>
+                  <CartesianGrid vertical={false} />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                  />
+                  <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                  <ChartLegend content={<ChartLegendContent />} />
+                  {/* One Bar for each mood; all bars use the same stackId to be stacked */}
+                  <Bar
+                    dataKey="happy"
+                    stackId="a"
+                    fill="hsl(var(--chart-1))"
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="calm"
+                    stackId="a"
+                    fill="hsl(var(--chart-2))"
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="neutral"
+                    stackId="a"
+                    fill="hsl(var(--chart-3))"
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="sad"
+                    stackId="a"
+                    fill="hsl(var(--chart-4))"
+                    radius={[4, 4, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="stressed"
+                    stackId="a"
+                    fill="hsl(var(--chart-5))"
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
