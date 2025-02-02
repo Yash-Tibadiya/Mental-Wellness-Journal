@@ -9,7 +9,7 @@ export function QuoteDisplay() {
     fetch("https://zenquotes.io/api/random")
     // fetch("https://api.quotable.io/random")
       .then((res) => res.json())
-      .then((data) => setQuote({ content: data.content, author: data.author }));
+      .then((data) => setQuote({ content: data.q, author: data.a }));
   }, []);
 
   if (!quote) return null;
@@ -19,8 +19,8 @@ export function QuoteDisplay() {
       <div className="flex items-start gap-4">
         <Quote className="w-8 h-8 flex-shrink-0 mt-1" />
         <div>
-          <p className="text-lg font-medium italic mb-2">{quote.content}</p>
-          <p className="text-sm opacity-90">— {quote.author}</p>
+          <p className="text-lg font-medium italic mb-2">{quote.q}</p>
+          <p className="text-sm opacity-90">— {quote.a}</p>
         </div>
       </div>
     </div>
