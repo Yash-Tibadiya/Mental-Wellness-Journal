@@ -17,39 +17,38 @@ import {
 import { Book, Brain, Coffee, Frown, Home, Meh, Smile } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "../mode-toggle";
+import { ContributionHeatmap } from "../ContributionHeatmap";
 
 // Define the ChartConfig using our mood keys and colors.
 const chartConfig = {
-  happy: {
-    label: "Happy",
-    color: "hsl(var(--chart-1))",
-    icon: Smile,
-  },
-  calm: {
-    label: "Calm",
-    color: "hsl(var(--chart-2))",
-    icon: Coffee,
-  },
-  neutral: {
-    label: "Neutral",
-    color: "hsl(var(--chart-3))",
-    icon: Meh,
+  stressed: {
+    label: "Stressed",
+    color: "hsl(var(--chart-5))",
+    icon: Brain,
   },
   sad: {
     label: "Sad",
     color: "hsl(var(--chart-4))",
     icon: Frown,
   },
-  stressed: {
-    label: "Stressed",
-    color: "hsl(var(--chart-5))",
-    icon: Brain,
+  neutral: {
+    label: "Neutral",
+    color: "hsl(var(--chart-3))",
+    icon: Meh,
+  },
+  calm: {
+    label: "Calm",
+    color: "hsl(var(--chart-2))",
+    icon: Coffee,
+  },
+  happy: {
+    label: "Happy",
+    color: "hsl(var(--chart-1))",
+    icon: Smile,
   },
 } satisfies ChartConfig;
 
 // Helper function to aggregate JournalEntry data by month.
-// It reads the entries from localStorage and groups them by month,
-// counting the number of entries per mood.
 function aggregateJournalEntries() {
   const saved = localStorage.getItem("journal-entries");
   let entries: {
@@ -114,28 +113,34 @@ export function ChartPage() {
   const chartData = aggregateJournalEntries();
 
   return (
-    <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center gap-4 m-5">
-          <Link
-            to="/"
-            className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-          >
-            <Home className="h-[1.5rem] w-[1.5rem] text-gray-700 dark:text-white" />
-          </Link>
-          <ModeToggle />
-          <Link
-            to="/journal"
-            className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center gap-3 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-          >
-            <Book className="h-[1.5rem] w-[1.5rem]" />
-          </Link>
-        </div>
-      <div className="w-full h-auto flex justify-center items-center">
-        <div className="w-2/3">
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      {/* Navigation */}
+      <div className="flex justify-center items-center gap-4 mb-5 w-full max-w-2xl mt-4">
+        <Link
+          to="/"
+          className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+        >
+          <Home className="h-[1.5rem] w-[1.5rem] text-gray-700 dark:text-white" />
+        </Link>
+        <ModeToggle />
+        <Link
+          to="/journal"
+          className="flex border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-12 w-12 justify-center items-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+        >
+          <Book className="h-[1.5rem] w-[1.5rem]" />
+        </Link>
+      </div>
+      {/* Chart Container */}
+      <div className="w-full flex justify-center items-center">
+        <div className="w-full md:w-2/3 lg:w-1/2">
           <Card>
             <CardHeader>
-              <CardTitle>Journal Entries by Mood (Stacked Bar Chart)</CardTitle>
-              <CardDescription>Aggregated by Month</CardDescription>
+              <CardTitle className="text-center">
+                Journal Entries by Mood (Stacked Bar Chart)
+              </CardTitle>
+              <CardDescription className="text-center">
+                Aggregated by Month
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={chartConfig}>
@@ -152,33 +157,33 @@ export function ChartPage() {
                   <ChartLegend content={<ChartLegendContent />} />
                   {/* One Bar for each mood; all bars use the same stackId to be stacked */}
                   <Bar
-                    dataKey="happy"
+                    dataKey="stressed"
                     stackId="a"
-                    fill="hsl(var(--chart-1))"
-                    radius={[4, 4, 0, 0]}
-                  />
-                  <Bar
-                    dataKey="calm"
-                    stackId="a"
-                    fill="hsl(var(--chart-2))"
-                    radius={[4, 4, 0, 0]}
-                  />
-                  <Bar
-                    dataKey="neutral"
-                    stackId="a"
-                    fill="hsl(var(--chart-3))"
-                    radius={[4, 4, 0, 0]}
+                    fill="hsl(var(--chart-5))"
+                    radius={[0, 0, 4, 4]}
                   />
                   <Bar
                     dataKey="sad"
                     stackId="a"
                     fill="hsl(var(--chart-4))"
-                    radius={[4, 4, 0, 0]}
+                    radius={[0, 0, 0, 0]}
                   />
                   <Bar
-                    dataKey="stressed"
+                    dataKey="neutral"
                     stackId="a"
-                    fill="hsl(var(--chart-5))"
+                    fill="hsl(var(--chart-3))"
+                    radius={[0, 0, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="calm"
+                    stackId="a"
+                    fill="hsl(var(--chart-2))"
+                    radius={[0, 0, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="happy"
+                    stackId="a"
+                    fill="hsl(var(--chart-1))"
                     radius={[4, 4, 0, 0]}
                   />
                 </BarChart>
@@ -186,6 +191,9 @@ export function ChartPage() {
             </CardContent>
           </Card>
         </div>
+      </div>
+      <div className="w-full flex justify-center items-center mt-10">
+        <ContributionHeatmap />
       </div>
     </div>
   );

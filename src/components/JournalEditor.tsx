@@ -28,7 +28,7 @@ export function JournalEditor({ onSave }: JournalEditorProps) {
   };
 
   return (
-    <div className="rounded-lg p-6 shadow-md border border-gray-200 bg-white dark:bg-[#101012] dark:border-[#1f1f23]">
+    <div className="w-full max-w-3xl mx-auto rounded-lg p-6 shadow-md border border-gray-200 bg-white dark:bg-[#101012] dark:border-[#1f1f23]">
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
@@ -74,8 +74,7 @@ export function JournalEditor({ onSave }: JournalEditorProps) {
 
       <button
         onClick={handleSave}
-        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r 
-                         from-purple-600 to-blue-600 text-white rounded-md transition-colors duration-200"
+        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-md transition-colors duration-200"
       >
         <Save size={20} />
         Save Entry

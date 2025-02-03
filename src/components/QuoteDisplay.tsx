@@ -27,16 +27,20 @@ export function QuoteDisplay() {
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-6 rounded-lg shadow-lg">
-        <p className="text-lg font-medium">Loading quote...</p>
+      <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+        <p className="text-base sm:text-lg font-medium break-words">
+          Loading quote...
+        </p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-lg shadow-lg">
-        <p className="text-lg font-medium">Error: {error}</p>
+      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+        <p className="text-base sm:text-lg font-medium break-words">
+          Error: {error}
+        </p>
       </div>
     );
   }
@@ -44,12 +48,16 @@ export function QuoteDisplay() {
   if (!quote) return null;
 
   return (
-    <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-6 rounded-lg shadow-lg">
-      <div className="flex items-start gap-4">
-        <Quote className="w-8 h-8 flex-shrink-0 mt-1" />
-        <div>
-          <p className="text-lg font-medium italic mb-2">{quote.quote}</p>
-          <p className="text-sm opacity-90">— {quote.author}</p>
+    <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
+      <div className="flex flex-col sm:flex-row items-start gap-4">
+        <Quote className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 mt-1" />
+        <div className="w-full">
+          <p className="text-base sm:text-lg font-medium italic mb-2 break-words">
+            {quote.quote}
+          </p>
+          <p className="text-xs sm:text-sm opacity-90 break-words">
+            — {quote.author}
+          </p>
         </div>
       </div>
     </div>

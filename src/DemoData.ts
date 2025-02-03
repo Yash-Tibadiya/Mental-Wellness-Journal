@@ -26,7 +26,7 @@ function getRandomTags(): string[] {
   return tags;
 }
 
-export const demoJournalEntries: JournalEntry[] = Array.from({ length: 1000 }, (_, i) => {
+export const demoJournalEntries: JournalEntry[] = Array.from({ length: 500 }, (_, i) => {
   const date = getRandomDate();
   return {
     id: (i + 1).toString(),
