@@ -4,12 +4,42 @@ import type { Quote as QuoteType } from "../types";
 
 export function QuoteDisplay() {
   const [quote, setQuote] = useState<QuoteType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("https://dummyjson.com/quotes/random")
-      .then((res) => res.json())
-      .then((data) => setQuote({ quote: data.quote, author: data.author }));
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch quote");
+        return res.json();
+      })
+      .then((data) => {
+        setQuote({ quote: data.quote, author: data.author });
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-6 rounded-lg shadow-lg">
+        <p className="text-lg font-medium">Loading quote...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-lg shadow-lg">
+        <p className="text-lg font-medium">Error: {error}</p>
+      </div>
+    );
+  }
 
   if (!quote) return null;
 
