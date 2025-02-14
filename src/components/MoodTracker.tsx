@@ -35,7 +35,10 @@ const moods: { type: Mood; icon: React.ReactNode; label: string }[] = [
   },
 ];
 
-export function MoodTracker({ selectedMood, onMoodSelect }: MoodTrackerProps) {
+export function MoodTracker({
+  selectedMood = "happy",
+  onMoodSelect,
+}: MoodTrackerProps) {
   return (
     <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg dark:bg-[#101012]">
       <h3 className="mb-4 text-lg font-semibold dark:text-white">

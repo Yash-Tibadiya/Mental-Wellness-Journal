@@ -43,7 +43,7 @@ export function Journal() {
     const saved = localStorage.getItem("journal-entries");
     return saved ? JSON.parse(saved) : demoJournalEntries;
   });
-  const [currentMood, setCurrentMood] = useState<Mood | null>(null);
+  const [currentMood, setCurrentMood] = useState<Mood>("happy");
 
   // Persist entries to localStorage on change
   useEffect(() => {
@@ -63,7 +63,7 @@ export function Journal() {
     };
 
     setEntries([newEntry, ...entries]);
-    setCurrentMood(null);
+    setCurrentMood("happy");
   };
 
   return (

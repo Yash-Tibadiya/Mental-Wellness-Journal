@@ -25,12 +25,27 @@ export function QuoteDisplay() {
       });
   }, []);
 
+  // if (loading) {
+  //   return (
+  //     <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+  //       <p className="text-base sm:text-lg font-medium break-words">
+  //         Loading quote...
+  //       </p>
+  //     </div>
+  //   );
+  // }
+
   if (loading) {
     return (
-      <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
-        <p className="text-base sm:text-lg font-medium break-words">
-          Loading quote...
-        </p>
+      <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
+        <div className="flex flex-col sm:flex-row items-start gap-4">
+          <div className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 mt-1 animate-pulse bg-white/30 rounded" />
+          <div className="w-full">
+            <div className="h-4 sm:h-5 bg-white/30 rounded animate-pulse mb-2 w-3/4" />
+            <div className="h-4 sm:h-5 bg-white/30 rounded animate-pulse mb-2 w-4/5" />
+            <div className="h-3 sm:h-4 bg-white/30 rounded animate-pulse w-1/4" />
+          </div>
+        </div>
       </div>
     );
   }
