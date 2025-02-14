@@ -26,7 +26,9 @@ export function CalendarForm({ selectedDate, onDateChange }: CalendarFormProps) 
               !selectedDate && "text-muted-foreground"
             )}
           >
-            {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+            {selectedDate
+              ? format(selectedDate, "PPP")
+              : format(new Date(), "PPP")}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
