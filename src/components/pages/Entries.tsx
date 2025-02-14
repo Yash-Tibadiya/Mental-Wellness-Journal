@@ -22,6 +22,14 @@
    stressed: <Brain className="w-5 h-5 text-red-500" />,
  };
 
+ const moodIconsW: Record<Mood, React.ReactNode> = {
+   happy: <Smile className="w-5 h-5" />,
+   calm: <Coffee className="w-5 h-5" />,
+   neutral: <Meh className="w-5 h-5" />,
+   sad: <Frown className="w-5 h-5" />,
+   stressed: <Brain className="w-5 h-5" />,
+ };
+
  const moodLabels: Record<Mood, string> = {
    happy: "Happy",
    calm: "Calm",
@@ -82,45 +90,6 @@
          </header>
 
          {/* Filters */}
-         {/* <div className="mb-8 space-y-4">
-           <div className="relative">
-             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-             <input
-               type="text"
-               placeholder="Search entries..."
-               className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white dark:bg-[#18181b] focus:ring-2 focus:ring-blue-500"
-               value={searchTerm}
-               onChange={(e) => setSearchTerm(e.target.value)}
-             />
-           </div>
-           <div className="flex gap-2 overflow-x-auto pb-2">
-             <button
-               onClick={() => setSelectedMood("all")}
-               className={`px-4 py-2 rounded-full ${
-                 selectedMood === "all"
-                   ? "bg-blue-500 text-white"
-                   : "bg-gray-200 dark:bg-gray-700"
-               }`}
-             >
-               All
-             </button>
-             {Object.entries(moodLabels).map(([mood, label]) => (
-               <button
-                 key={mood}
-                 onClick={() => setSelectedMood(mood as Mood)}
-                 className={`flex items-center gap-2 px-4 py-2 rounded-full ${
-                   selectedMood === mood
-                     ? "bg-blue-500 text-white"
-                     : "bg-gray-200 dark:bg-gray-700"
-                 }`}
-               >
-                 {moodIcons[mood as Mood]}
-                 {label}
-               </button>
-             ))}
-           </div>
-         </div> */}
-         {/* Filters */}
          <div className="mb-8 space-y-4">
            <div className="relative">
              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -149,11 +118,11 @@
                  onClick={() => setSelectedMood(mood as Mood)}
                  className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full whitespace-nowrap ${
                    selectedMood === mood
-                     ? "bg-blue-500 text-white"
+                     ? "bg-blue-500 text-black"
                      : "bg-gray-200 dark:bg-gray-700"
                  }`}
                >
-                 {moodIcons[mood as Mood]}
+                 {moodIconsW[mood as Mood]}
                  {label}
                </button>
              ))}
