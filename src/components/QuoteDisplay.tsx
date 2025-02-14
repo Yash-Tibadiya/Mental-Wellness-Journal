@@ -25,16 +25,6 @@ export function QuoteDisplay() {
       });
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
-  //       <p className="text-base sm:text-lg font-medium break-words">
-  //         Loading quote...
-  //       </p>
-  //     </div>
-  //   );
-  // }
-
   if (loading) {
     return (
       <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
@@ -52,8 +42,8 @@ export function QuoteDisplay() {
 
   if (error) {
     return (
-      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
-        <p className="text-base sm:text-lg font-medium break-words">
+      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg font-medium break-words py-4">
           Error: {error}
         </p>
       </div>
