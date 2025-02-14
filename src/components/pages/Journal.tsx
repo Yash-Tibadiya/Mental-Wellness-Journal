@@ -1,37 +1,14 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Smile,
-  Meh,
-  Frown,
-  Coffee,
-  Brain,
-  Home,
-  ChartColumnStacked,
-  Book,
-} from "lucide-react";
+import { Home, ChartColumnStacked, Book } from "lucide-react";
+
 import { JournalEditor } from "../JournalEditor";
 import { MoodTracker } from "../MoodTracker";
 import { QuoteDisplay } from "../QuoteDisplay";
 import { ModeToggle } from "../../components/mode-toggle";
 import type { JournalEntry, Mood } from "../../types";
 import { demoJournalEntries } from "../../DemoData";
-
-const moodIcons: Record<Mood, React.ReactNode> = {
-  happy: <Smile className="w-5 h-5 text-yellow-500" />,
-  calm: <Coffee className="w-5 h-5 text-blue-500" />,
-  neutral: <Meh className="w-5 h-5 text-green-500" />,
-  sad: <Frown className="w-5 h-5 text-gray-500" />,
-  stressed: <Brain className="w-5 h-5 text-red-500" />,
-};
-
-const moodLabels: Record<Mood, string> = {
-  happy: "Happy",
-  calm: "Calm",
-  neutral: "Neutral",
-  sad: "Sad",
-  stressed: "Stressed",
-};
 
 export function Journal() {
   // Load entries from localStorage
@@ -107,51 +84,19 @@ export function Journal() {
             <JournalEditor onSave={handleSaveEntry} />
           </div>
         </div>
+      </div>
 
-        {/* Previous Entries */}
-        <div className="mt-8">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-            Previous Entries
-          </h2>
-          <div className="space-y-4">
-            {entries.map((entry, index) => (
-              <div
-                key={entry.id}
-                className="bg-white dark:bg-[#18181b] rounded-lg p-4 sm:p-6 shadow-lg transform hover:scale-105 transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      {moodIcons[entry.mood]}
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        Feeling {moodLabels[entry.mood]}
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {entry.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 text-xs sm:text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-2 sm:mt-0 text-right">
-                    <div className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400">
-                      {new Date(entry.date).toLocaleDateString()}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-                  {entry.content}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Floating Journal Entries Button */}
+      <div className="mt-16 mb-16 text-center">
+        <Link
+          to="/entries"
+          className="inline-flex items-center gap-3 px-6 py-3 text-white transition-all duration-300 rounded-lg shadow-lg sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-xl hover:scale-105"
+        >
+          <Book className="w-6 h-6" />
+          <span className="text-base font-medium sm:text-lg">
+            Journal Entries
+          </span>
+        </Link>
       </div>
     </div>
   );
