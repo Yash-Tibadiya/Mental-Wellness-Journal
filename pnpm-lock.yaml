@@ -45,8 +45,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-calendar-heatmap:
-        specifier: ^1.9.0
-        version: 1.9.0(react@18.3.1)
+        specifier: ^1.10.0
+        version: 1.10.0(react@18.3.1)
       react-day-picker:
         specifier: 8.10.1
         version: 8.10.1(date-fns@4.1.0)(react@18.3.1)
@@ -1646,10 +1646,10 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
 
-  react-calendar-heatmap@1.9.0:
-    resolution: {integrity: sha512-mGed9any6QLOVckxwxC/eeP9s9wE8mTUW/FCE0V27xF9WOaCGuOftGSRH8DSDoSwgzMSVF6uuH7M1xvc+aZ8sg==}
+  react-calendar-heatmap@1.10.0:
+    resolution: {integrity: sha512-e5vcrzMWzKIF710egr1FpjWyuDEFeZm39nvV25muc8Wtqqi8iDOfqREELeQ9Wouqf9hhj939gq0i+iAxo7KdSw==}
     peerDependencies:
-      react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react: '>=0.14.0'
 
   react-day-picker@8.10.1:
     resolution: {integrity: sha512-TMx7fNbhLk15eqcMt+7Z7S2KF7mfTId/XJDjKE8f+IUcFn0l08/kI4FiYTL/0yuOLmEcbR4Fwe3GJf/NiiMnPA==}
@@ -3395,7 +3395,7 @@ snapshots:
 
   quick-lru@5.1.1: {}
 
-  react-calendar-heatmap@1.9.0(react@18.3.1):
+  react-calendar-heatmap@1.10.0(react@18.3.1):
     dependencies:
       memoize-one: 5.2.1
       prop-types: 15.8.1
